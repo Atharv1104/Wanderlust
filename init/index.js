@@ -1,3 +1,4 @@
+
 const mongoose=require("mongoose");
 const initdata = require("./data.js");
 const Listing= require("../Models/listing.js");
@@ -18,4 +19,5 @@ const initDB = async ()=>{
    await Listing.insertMany(initdata.data);
     console.log("data was initialized");
 }
+
 initDB()
