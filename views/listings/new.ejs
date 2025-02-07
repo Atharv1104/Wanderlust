@@ -3,47 +3,53 @@
 <body>
     
     <h2>Create New Listing</h2>
-    <form method="POST" action="/listings">
+    <form method="POST" action="/listings" class="needs-validation" novalidate>
         <div class="row">
             <div class="col-8 offset-2">
-        <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
-        <input type="text" placeholder="Enter name" class="form-control" name="listing[title]">
-        </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">description</label>
-            <textarea cols="50" rows="5" class="form-control" name="listing[description]"></textarea>
-
-        </div>
-        <div class="mb-3">
-            <label for="image" class="form-label">Image Link</label>
-            <input type="text" placeholder="Enter image URL/link" class="form-control" name="listing[image]">
-
-        </div>
-        <div class="row">
-            <div class="mb-3 col-md-4">
-                <label for="price" class="form-label">Price</label>
-                <input type="number" name="listing[price]"class="form-control"  placeholder="Enter price">
-    
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" placeholder="Enter name" class="form-control" name="listing[title]" required>
+                <div class="valid-feedback">Title is good</div>
+                <div class="invalid-feedback">Kuch toh naam hoga..</div>
             </div>
-            <div class="mb-3 col-md-8">
-                <label for="country" class="form-label">Country</label>
-                <input type="text" placeholder="Enter country name"class="form-control"  name="listing[country]">
-    
+            
+            
+            <div class="mb-3">
+                <label for="description" class="form-label">description</label>
+                <textarea cols="50" rows="5" class="form-control" name="listing[description]" required></textarea>
+
             </div>
-        </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image Link</label>
+                <input type="text" placeholder="Enter image URL/link" class="form-control" name="listing[image]">
+                <div class="valid-feedback">Image link is optional</div>
+            </div>
+            
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                 <label for="price" class="form-label">Price</label>
+                 <input type="number" name="listing[price]"class="form-control"  placeholder="Enter price" required>
+                 <div class="invalid-feedback">fokat me dena hai kya?</div>
+                </div>
+                <div class="mb-3 col-md-8">
+                 <label for="country" class="form-label">Country</label>
+                 <input type="text" placeholder="Enter country name"class="form-control"  name="listing[country]" required>
+                 <div class="invalid-feedback">kidhar, swarg mai hai ya nark mai?</div>
+                </div>
+            </div>
         
-        <div class="mb-3">
-            <label for="location" class="form-label">Location</label>
-            <input type="text" placeholder="Enter location" class="form-control" name="listing[location]"> 
+            <div class="mb-3">
+             <label for="location" class="form-label">Location</label>
+                <input type="text" placeholder="Enter location" class="form-control" name="listing[location]" required> 
+                <div class="invalid-feedback">khud se dhundna hai kya?*</div>
+            </div>
 
+            <button class="btn btn-dark add-btn">Add Listing</button>
         </div>
-
-        <button class="btn btn-dark add-btn">Add Listing</button>
     </form>
 
-</div>
-</div>
+
+
 
 </body>
 
