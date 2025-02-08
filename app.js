@@ -9,6 +9,8 @@ const ejsMate= require("ejs-mate");
 const Listing= require("./Models/listing.js")
 const ExpressError=require("./Utils/ExpressError.js")
 const wrapAsync=require("./Utils/wrapAsync.js")
+const {listingSchema}=require("./schema.js");
+
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended: true}));
@@ -33,6 +35,14 @@ app.get("/",(req,res)=>{
     res.send("Hi i am root");
 });
 
+const validateListing=(req,res,next)=>{
+    let {error}=listingSchema.validate(req.body);
+    if(error){
+        let errMsg=error.details.map((el)=> el.message).join(",")
+        throw new ExpressError(400,errMsg);
+    }
+}
+
 // index Route
 app.get("/listings",
     wrapAsync(async (req,res)=>{
@@ -54,7 +64,7 @@ app.get("/listing/:id",wrapAsync(async (req,res)=>{
 }));
 
 //create
-app.post("/listings",
+app.post("/listings",validateListing,
     wrapAsync(async(req,res,next)=>{
     
     const newListing=new Listing (req.body.listing);
@@ -71,7 +81,7 @@ app.get("/listings/:id/edit",wrapAsync(async(req,res)=>{
     res.render("./listings/edit.ejs",{listing});
 }));
 //update
- app.put("/listings/:id",wrapAsync(async(req,res)=>{
+ app.put("/listings/:id",validateListing,wrapAsync(async(req,res)=>{
     let {id}= req.params;
     await Listing.findByIdAndUpdate(id, {...req.body.listing});
     res.redirect(`/listings/${id}/edit`);
