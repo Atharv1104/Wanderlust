@@ -9,7 +9,8 @@ const ejsMate= require("ejs-mate");
 const Listing= require("./Models/listing.js")
 const ExpressError=require("./Utils/ExpressError.js")
 const wrapAsync=require("./Utils/wrapAsync.js")
-const {listingSchema}=require("./schema.js");
+const {listingSchema,reviewSchema}=require("./schema.js");
+const Review= require("./Models/review.js")
 
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
@@ -40,8 +41,22 @@ const validateListing=(req,res,next)=>{
     if(error){
         let errMsg=error.details.map((el)=> el.message).join(",")
         throw new ExpressError(400,errMsg);
+    }else{
+        next();
     }
 }
+const validateReview=(req,res,next)=>{
+    let {error}=reviewSchema.validate(req.body.Review);
+    if(error){
+        let errMsg=error.details.map((el)=> el.message).join(",")
+        throw new ExpressError(400,errMsg);
+        
+    }else{
+        next();
+    }
+    
+    
+};
 
 // index Route
 app.get("/listings",
@@ -59,7 +74,8 @@ app.get("/listings/new",(req,res)=>{
 //Read Route
 app.get("/listing/:id",wrapAsync(async (req,res)=>{
     let {id}=req.params;
-    const listing= await Listing.findById(id);
+    const listing= await Listing.findById(id).populate("reviews");
+    console.log(listing);
     res.render("./listings/show.ejs",{listing});
 }));
 
@@ -98,6 +114,25 @@ app.delete("/listings/:id/delete",wrapAsync(
     })
 );
 
+//reviews
+//post route
+app.post("/listings/:id/reviews",validateReview,wrapAsync(async (req,res)=>{
+    let listing=await Listing.findById(req.params.id);
+    let newReview= new Review(req.body.review);
+    let {id}=req.params
+
+   
+
+    listing.reviews.push(newReview);
+   
+    await listing.save();
+
+    console.log("New review saved");
+    console.log(listing);
+    console.log(listing.reviews);
+    res.redirect(`/listing/${id}`);
+})
+);
 
 app.get("/admin", (req,res)=>{
     throw new ExpressError(403,"No Access to Admin")
@@ -105,7 +140,7 @@ app.get("/admin", (req,res)=>{
 
 app.use((err,req,res,next)=>{
     let {status=500 ,message="Some error occured"}= err;
-    res.status(status).send(message);   
+    res.render("./error.ejs",{message});   
 })
 app.listen(8080,()=>{
     console.log("App is listening at port 8080");
