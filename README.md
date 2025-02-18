@@ -1,2 +1,6 @@
 # Wanderlust
-Wanderlust is a website made by me similar to Airbnb.
+Wanderlust is a website where yo can rent a property.
+features:
+Basic crud operations like list, delete, update, view all properties.
+Currently working on rating feature.
+Planning to implement Authentication, login/sign up fearures
