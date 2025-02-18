@@ -1,4 +1,3 @@
-
 const express =require("express");
 const app = express();
 const mongoose=require("mongoose");
@@ -71,12 +70,11 @@ app.get("/listings/new",(req,res)=>{
     res.render("./listings/new.ejs");
     })
 
-//Read Route
-app.get("/listing/:id",wrapAsync(async (req,res)=>{
-    let {id}=req.params;
-    const listing= await Listing.findById(id).populate("reviews");
-    console.log(listing);
-    res.render("./listings/show.ejs",{listing});
+// Read Route
+app.get("/listing/:id", wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    const listing = await Listing.findById(id).populate("review");
+    res.render("./listings/show.ejs", { listing });
 }));
 
 //create
@@ -86,9 +84,6 @@ app.post("/listings",validateListing,
     const newListing=new Listing (req.body.listing);
     await newListing.save();
     res.redirect("/listings")
-    
-    
-
 }));
     
 app.get("/listings/:id/edit",wrapAsync(async(req,res)=>{
@@ -114,25 +109,18 @@ app.delete("/listings/:id/delete",wrapAsync(
     })
 );
 
-//reviews
-//post route
-app.post("/listings/:id/reviews",validateReview,wrapAsync(async (req,res)=>{
-    let listing=await Listing.findById(req.params.id);
-    let newReview= new Review(req.body.review);
-    let {id}=req.params
-
-   
-
-    listing.reviews.push(newReview);
-   
+// reviews
+// post route
+app.post("/listings/:id/reviews", validateReview, wrapAsync(async (req, res) => {
+    let listing = await Listing.findById(req.params.id);
+    let newReview = new Review(req.body.review);
+    await newReview.save(); // Save the review first
+    listing.review.push(newReview);
     await listing.save();
-
     console.log("New review saved");
-    console.log(listing);
-    console.log(listing.reviews);
-    res.redirect(`/listing/${id}`);
-})
-);
+    console.log(newReview);
+    res.redirect(`/listing/${req.params.id}`);
+}));
 
 app.get("/admin", (req,res)=>{
     throw new ExpressError(403,"No Access to Admin")

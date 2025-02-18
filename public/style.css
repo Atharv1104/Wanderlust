@@ -17,10 +17,13 @@
 .nav-link{
     color:#222222 !important;
 }
+/* Footer */
+
 .f-info-links,
 .f-info-socials,
 .f-info-brand{
     width: 100%;
+    
     vertical-align: middle;
 }
 .f-info-links a{
