@@ -1,43 +1,45 @@
-.body{
-    display: flex;
-    flex-direction:column;
+.body {
     min-height: 100vh;
 }
-.conntainer{
-    flex:1 ;
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.navbar{
+.navbar {
     height: 5rem;
 }
-.fa-compass{
-    color:#fe424d;
+
+.fa-compass {
+    color: #fe424d;
     font-size: 1.7rem;
 }
-.nav-link{
-    color:#222222 !important;
-}
-/* Footer */
 
+.nav-link {
+    color: #222222 !important;
+}
+
+/* Footer */
 .f-info-links,
 .f-info-socials,
-.f-info-brand{
+.f-info-brand {
     width: 100%;
-    
     vertical-align: middle;
 }
-.f-info-links a{
-    
-    text-decoration:none ;
-    color:#222222;
-}
-.f-info-links:hover{
-    text-decoration:underline ;
-    color:#222222;
-    
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
 }
 
-.f-info{
+.f-info-links:hover {
+    text-decoration: underline;
+    color: #222222;
+}
+
+.f-info {
     text-align: center;
     display: flex;
     background-color: #ebebeb;
@@ -47,44 +49,56 @@
 }
 
 .f-info-socials {
-    width:100%;
+    width: 100%;
     font-size: 1.2rem;
 }
-.f-info-socials i{
-margin-right:1rem ;
-}
-.card{
-  
- margin-bottom: 2rem;
- 
-}
-.card-img-top{
-    border-radius: 1 rem !important;
-    width:100% !important;
-   
+
+.f-info-socials i {
+    margin-right: 1rem;
 }
 
-.card-img-top:hover{
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.card:hover{
+    transform: scale(1.05);
+}
+
+.card {
+    margin-bottom: 2rem;
+    width: calc(33.333% - 1rem); /* Adjust the width to fit 3 cards in a row */
+    box-sizing: border-box;
+}
+
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100% !important;
+}
+
+.card-img-top:hover {
     opacity: 0.8;
     background-color: white;
 }
-.add-btn{
-    background-color:#fe424d !important;
+
+.add-btn {
+    background-color: #fe424d !important;
 }
 
-.show-img{
+.show-img {
     height: 40vh;
 }
-.btns{
+
+.btns {
     display: flex;
 }
-.edit-btn{
-    background-color:#fe424d !important;
-   
+
+.edit-btn {
+    background-color: #fe424d !important;
 }
 
-.card-btn{
-    
+.card-btn {
     margin-bottom: 10px;
     margin-left: 5rem;
 }

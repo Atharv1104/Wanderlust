@@ -1,15 +1,13 @@
 const express =require("express");
 const app = express();
+const listings =require("./routes/listing.js")
 const mongoose=require("mongoose");
 const MONGO_URL="mongodb://127.0.0.1:27017/wanderlust";
 const path=require("path")
 const methodOverride=require("method-override");
 const ejsMate= require("ejs-mate");
-const Listing= require("./Models/listing.js")
 const ExpressError=require("./Utils/ExpressError.js")
-const wrapAsync=require("./Utils/wrapAsync.js")
-const {listingSchema,reviewSchema}=require("./schema.js");
-const Review= require("./Models/review.js")
+const reviews= require("./routes/review.js")
 
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
@@ -35,92 +33,14 @@ app.get("/",(req,res)=>{
     res.send("Hi i am root");
 });
 
-const validateListing=(req,res,next)=>{
-    let {error}=listingSchema.validate(req.body);
-    if(error){
-        let errMsg=error.details.map((el)=> el.message).join(",")
-        throw new ExpressError(400,errMsg);
-    }else{
-        next();
-    }
-}
-const validateReview=(req,res,next)=>{
-    let {error}=reviewSchema.validate(req.body.Review);
-    if(error){
-        let errMsg=error.details.map((el)=> el.message).join(",")
-        throw new ExpressError(400,errMsg);
-        
-    }else{
-        next();
-    }
-    
-    
-};
 
-// index Route
-app.get("/listings",
-    wrapAsync(async (req,res)=>{
-    
-    const allListings=await Listing.find({});
-    res.render("./listings/index.ejs",{allListings})
-   }));
 
-//New Route
-app.get("/listings/new",(req,res)=>{
-    res.render("./listings/new.ejs");
-    })
 
-// Read Route
-app.get("/listing/:id", wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    const listing = await Listing.findById(id).populate("review");
-    res.render("./listings/show.ejs", { listing });
-}));
 
-//create
-app.post("/listings",validateListing,
-    wrapAsync(async(req,res,next)=>{
-    
-    const newListing=new Listing (req.body.listing);
-    await newListing.save();
-    res.redirect("/listings")
-}));
-    
-app.get("/listings/:id/edit",wrapAsync(async(req,res)=>{
-    let {id}=req.params;
-    const listing = await Listing.findById(id);
-    res.render("./listings/edit.ejs",{listing});
-}));
-//update
- app.put("/listings/:id",validateListing,wrapAsync(async(req,res)=>{
-    let {id}= req.params;
-    await Listing.findByIdAndUpdate(id, {...req.body.listing});
-    res.redirect(`/listings/${id}/edit`);
- }
-))
+app.use("/listings",listings);
 
-//Delete
-app.delete("/listings/:id/delete",wrapAsync(
-    async (req,res)=>{
-        let {id}= req.params;
-       let delListing= await Listing.findByIdAndDelete(id);
-       console.log(delListing);
-       res.redirect("/listings");
-    })
-);
+app.use("/listings/:id/reviews",reviews)
 
-// reviews
-// post route
-app.post("/listings/:id/reviews", validateReview, wrapAsync(async (req, res) => {
-    let listing = await Listing.findById(req.params.id);
-    let newReview = new Review(req.body.review);
-    await newReview.save(); // Save the review first
-    listing.review.push(newReview);
-    await listing.save();
-    console.log("New review saved");
-    console.log(newReview);
-    res.redirect(`/listing/${req.params.id}`);
-}));
 
 app.get("/admin", (req,res)=>{
     throw new ExpressError(403,"No Access to Admin")
