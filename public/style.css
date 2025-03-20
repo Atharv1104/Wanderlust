@@ -5,19 +5,40 @@ body {
     margin: 0;
 }
 
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.min-vh-100 {
+    min-height: 100vh;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+.mt-auto {
+    margin-top: auto;
+}
+
 .container {
-    flex: 1;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
-    width:100%;
-   
+    width: 100%;
 }
 
 /*Nav Bar*/
 .navbar {
     height: 5rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .fa-compass {
@@ -34,7 +55,6 @@ body {
     background-color: #ebebeb;
     text-align: center;
     padding: 1rem 0;
-    margin-top: auto;
     width: 100%;
     box-sizing: border-box;
 }
@@ -61,7 +81,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-}   
+}
 
 .f-info-socials {
     width: 100%;
@@ -123,6 +143,6 @@ body {
 }
 
 /*Header new-listing*/
-.head{
+.head {
     align-self: center;
 }

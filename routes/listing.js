@@ -66,6 +66,7 @@ router.get("/:id/edit",wrapAsync(async(req,res)=>{
 //update
  router.put("/:id",validateListing,wrapAsync(async(req,res)=>{
     let {id}= req.params;
+    const listing = await Listing.findById(id);
     await Listing.findByIdAndUpdate(id, {...req.body.listing});
     if(!listing){
         req.flash("success","Listing does not Exist!");
@@ -80,13 +81,15 @@ router.get("/:id/edit",wrapAsync(async(req,res)=>{
 router.delete("/:id/delete",wrapAsync(
     async (req,res)=>{
         let {id}= req.params;
+        const listing = await Listing.findById(id);
        let delListing= await Listing.findByIdAndDelete(id);
-       console.log(delListing);
+       
+       req.flash("success","Listing deleted");
        if(!listing){
         req.flash("success","Listing does not Exist!");
         res.redirect("/listings")
-    }
-       req.flash("success","Listing deleted");
+        }
+       
        res.redirect("/listings");
     })
 );

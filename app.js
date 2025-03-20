@@ -1,16 +1,21 @@
 const express =require("express");
-const app = express();
-const listings =require("./routes/listing.js")
 const mongoose=require("mongoose");
-const MONGO_URL="mongodb://127.0.0.1:27017/wanderlust";
 const path=require("path")
 const methodOverride=require("method-override");
 const ejsMate= require("ejs-mate");
-const ExpressError=require("./Utils/ExpressError.js")
-const reviews= require("./routes/review.js")
 const session=require("express-session");
-
 const flash=require("connect-flash");
+const passport=require("passport");
+const localStrategy=require("passport-local");
+
+const ExpressError=require("./Utils/ExpressError.js");
+const listingsRouter =require("./routes/listing.js");
+const reviewsRouter= require("./routes/review.js");
+const userRouter= require("./routes/user.js");
+const User=require("./Models/user.js")
+
+const app = express();
+const MONGO_URL="mongodb://127.0.0.1:27017/wanderlust";
 
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
@@ -45,22 +50,35 @@ const sessionOptions={
     }
 }
 
-app.get("/",(req,res)=>{
-    res.send("Hi i am root");
-});
-
 app.use(session(sessionOptions));
 app.use(flash());
 
+app.use(passport.initialize());
+passport.use(new localStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 app.use((req,res,next)=>{
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     next();
 });
 
-app.use("/listings",listings);
-app.use("/listings/:id/reviews",reviews);
+app.use("/listings",listingsRouter);
+app.use("/listings/:id/reviews",reviewsRouter);
+app.use("/",userRouter);
 
+app.get("/",(req,res)=>{
+    res.send("Hi i am root");
+});
+// app.get("/demouser", async (req,res)=>{
+//     let fakeUser=new User({
+//         email:"student@gmail.com",
+//         username:"delta-student"
+//     });
+//     let registeredUser = await User.register(fakeUser,"helloworld");
+//     res.send(registeredUser);
+// });
 
 app.get("/admin", (req,res)=>{
     throw new ExpressError(403,"No Access to Admin")
