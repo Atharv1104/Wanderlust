@@ -1,5 +1,5 @@
 # Wanderlust
-Wanderlust is a website where yo can rent a property.
+Wanderlust is a website where you can rent a property.
 features:
 Basic crud operations like list, delete, update, view all properties.
 Currently working on rating feature.
