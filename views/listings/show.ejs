@@ -1,62 +1,85 @@
 <% layout('/layouts/boilerplate.ejs')-%>
 
-<div class="container">
-    <h2 class="head"><%= listing.title %></h2>
+<div class="container listing-container">
+    <h2 class="head text-center"><%= listing.title %></h2>
     <br>
-    <div class="row">
-        <div class="col-8 offset-2">
-            
-
-            <div class="card col-6 offset-3">
-                <img class="card-img-top show-img" src="<%= listing.image %>" alt="listing_image">
-
-                <div class="card-body">
-                    <p class="card-text"><%= listing.description %></p>
+    <div class="row justify-content-center">
+        <!-- Card Info Section -->
+        <div class="col-md-10 col-lg-8">
+            <div class="card mx-auto listing-card">
+                <div class="img-container">
+                    <img 
+                        class="card-img-top show-img" 
+                        src="<%= listing.image %>" 
+                        alt="<%= listing.title %>"
+                        loading="lazy"
+                        onerror="this.src='/images/default-listing.jpg'"
+                    >
                 </div>
-                
-                <ul>
-                    <li>Price: &#8377; <%= listing.price.toLocaleString("en-IN") %></li>
-                    <li>Location: <%= listing.location %></li>
-                    <li>Country: <%= listing.country %></li>
+                <div class="card-body">
+                    <h4 class="card-title text-center"><%= listing.title %></h4>
+                    <p class="card-text">
+                        <b>Owner:</b> <%= listing.owner.username %><br>
+                        <b>Description:</b> <%= listing.description %>
+                    </p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><b>Price:</b> &#8377; <%= listing.price.toLocaleString("en-IN") %></li>
+                    <li class="list-group-item"><b>Location:</b> <%= listing.location %></li>
+                    <li class="list-group-item"><b>Country:</b> <%= listing.country %></li>
                 </ul>
                 <hr>
-                <div class="btns">
-                    <a href="/listings/<%= listing._id %>/edit" class="btn edit-btn mb-3 primary col-4 offset-2">Edit</a><br>
-                    <form method="POST" action="/listings/<%= listing.id %>/delete?_method=DELETE">
-                        <button class="btn btn-dark primary mb-3 ">Delete</button>
+                <% if (currUser && listing.owner._id.equals(currUser._id)) { %>
+                <div class="btns d-flex justify-content-between px-3 pb-3">
+                    <a href="/listings/<%= listing._id %>/edit" class="btn edit-btn">Edit</a>
+                    <form method="POST" action="/listings/<%= listing._id %>/delete?_method=DELETE">
+                        <button class="btn btn-dark">Delete</button>
                     </form>
                 </div>
-                <br><br><br>
+                <% } %>
             </div>
-            <hr>
-            <div class="col-6 mt-34">
-                <h4>Leave a Review</h4>
-                <form action="/listings/<%= listing.id %>/reviews" method="POST" novalidate class="needs-validation">
-                    <div class="mt-3">
-                        <label for="rating" class="form-label">Rating</label>
-                        <input type="range" min="1" max="5" id="rating" name="review[rating]" class="form-range">
-                    </div>
-                    <div class="mt-3">
-                        <label for="comment" class="form-label">Comments</label>
-                        <textarea name="review[comment]" id="comment" cols="30" rows="10" class="form-control" required></textarea>
-                        <div class="invalid-feedback">Write review to submit</div>
-                    </div>
-                    <div class="mt-3">
-                        <button type="submit" class="btn btn-outline-dark">Submit</button>
-                    </div>
-                </form>
-            </div>
-            <hr>
-            <br>
-            <br>
-            <br>
-            <div class="col-6 mt-3">
-                <p><b>All reviews</b></p>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Review Form Section -->
+    <% if (currUser) { %>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h4 class="text-center">Leave a Review</h4>
+            <form action="/listings/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation">
+                <div class="mt-3">
+                    <label for="rating" class="form-label">Rating</label>
+                    <input type="range" min="1" max="5" id="rating" name="review[rating]" class="form-range">
+                </div>
+                <div class="mt-3">
+                    <label for="comment" class="form-label">Comments</label>
+                    <textarea name="review[comment]" id="comment" cols="30" rows="5" class="form-control" required></textarea>
+                    <div class="invalid-feedback">Write review to submit</div>
+                </div>
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-outline-dark">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <% } %>
+
+    <hr>
+
+    <!-- All Reviews Section -->
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <% if (!listing.review.length) { %>
+                <p class="text-center"><b>No reviews</b></p>
+            <% } else { %>
+                <p class="text-center"><b>All reviews</b></p>
                 <div class="card-container">
                     <% for (let review of listing.review) { %>
-                        <div class="card">
+                        <div class="review_card">
                             <div class="card-body">
-                                <h5 class="card-title">Jane doe</h5>
+                                <h5 class="card-title">@<%= review.author.username %></h5>
                                 <p class="card-text"><%= review.comment %></p>
                                 <p class="card-text"><%= review.rating %> stars</p>
                             </div>
@@ -66,7 +89,7 @@
                         </div>
                     <% } %>
                 </div>
-            </div>
+            <% } %>
         </div>
     </div>
 </div>

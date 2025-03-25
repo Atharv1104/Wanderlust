@@ -99,6 +99,11 @@ body {
     justify-content: space-evenly;
 }
 
+.cardInfo {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
 .card:hover {
     transform: scale(1.05);
 }
@@ -107,6 +112,27 @@ body {
     margin-bottom: 2rem;
     width: calc(33.333% - 1rem); /* Adjust the width to fit 3 cards in a row */
     box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+.card ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.card ul li {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #555;
 }
 
 .card-img-top {
@@ -130,11 +156,36 @@ body {
 
 .btns {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    margin-top: 1rem;
 }
 
 .edit-btn {
     background-color: #fe424d !important;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover {
+    background-color: #d93a3a !important;
+}
+
+.btn-dark {
+    background-color: #333 !important;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-dark:hover {
+    background-color: #555 !important;
 }
 
 .card-btn {
@@ -145,4 +196,109 @@ body {
 /*Header new-listing*/
 .head {
     align-self: center;
+}
+/* Review Card Styling */
+.cardInfo{
+    width: 100%;
+}
+.review_card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem 0;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.review_card .card-body {
+    padding: 0.5rem;
+}
+
+.review_card .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.review_card .card-text {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.review_card button {
+    background-color: #fe424d;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.review_card button:hover {
+    background-color: #d93a3a;
+}
+
+
+/* LISTING SHOW PAGE - WIDER IMAGE */
+.listing-container {
+    max-width: 1200px; /* Wider container */
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* Image Container - Wider Layout */
+.img-container {
+    height: 450px; /* Slightly taller */
+    width: 100%;
+    max-width: 900px; /* Constrain maximum width */
+    margin: 0 auto; /* Center horizontally */
+    overflow: hidden;
+    border-radius: 12px 12px 0 0; /* Rounded top only */
+}
+
+.show-img {
+    width: 100%;
+    min-width: 100%; /* Force full width */
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Card Layout Adjustments */
+.listing-card {
+    border: none; /* Remove default border */
+    background: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    width:600px;
+}
+.img-container{
+    width:100%;
+}
+
+/* Responsive Behavior */
+@media (min-width: 992px) {
+    .img-container {
+        height: 500px;
+         /* Taller on desktop */
+    }
+    .listing-card {
+        padding: 0 2rem 2rem; /* More horizontal space */
+    }
+}
+
+@media (max-width: 768px) {
+    .img-container {
+        height: 400px;
+        border-radius: 8px 8px 0 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .img-container {
+        height: 300px;
+    }
 }
