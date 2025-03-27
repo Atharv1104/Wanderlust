@@ -110,7 +110,7 @@ body {
 
 .card {
     margin-bottom: 2rem;
-    width: calc(33.333% - 1rem); /* Adjust the width to fit 3 cards in a row */
+    width:400px;
     box-sizing: border-box;
     border: 1px solid #ddd;
     border-radius: 10px;

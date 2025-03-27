@@ -5,7 +5,7 @@
     <div class="container">
         <h2 class="head">Create New Listing</h2>
 
-        <form method="POST" action="/listings" class="needs-validation" novalidate>
+        <form method="POST" action="/listings" class="needs-validation" novalidate enctype="multipart/form-data">
             <div class="row">
                 <div class="col-8 offset-2">
                     <div class="mb-3">
@@ -22,9 +22,9 @@
     
                     </div>
                     <div class="mb-3">
-                        <label for="image" class="form-label">Image Link</label>
-                        <input type="text" placeholder="Enter image URL/link" class="form-control" name="listing[image]">
-                        <div class="valid-feedback">Image link is optional</div>
+                        <label for="image" class="form-label"> Upload image</label>
+                        <input type="file"  class="form-control" name="listing[image]">
+                        
                     </div>
                 
                     <div class="row">

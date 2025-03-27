@@ -7,20 +7,26 @@
     <br>
     <br>
     <div class="card-container">
-      <% for(let listing of allListings){ %>
-        <div class="card ">
-          <img src="<%=listing.image%>" class="card-img-top" alt="image" style="height:20rem">
+      <% for(let listing of allListings) { %>
+        <div class="card">
+          <img src="<%= listing.image.url %>" class="card-img-top" alt="image" style="height:20rem">
           <div class="card-body">
-            <h5 class="card-title"><b><%=listing.title%></b></h5>
-            <p class="card-text"><%=listing.description%></p>
-            <p class="card-text">Location: <%=listing.location%><br>
-              Country: <%=listing.country%><br>
-              Price: &#8377;<%=listing.price.toLocaleString("en-IN")%>/Night
+            <h5 class="card-title"><b><%= listing.title %></b></h5>
+            <p class="card-text"><%= listing.description %></p>
+            <p class="card-text">
+              Location: <%= listing.location %><br>
+              Country: <%= listing.country %><br>
+              Price: 
+              <% if (listing.price) { %>
+                &#8377;<%= listing.price.toLocaleString("en-IN") %>/Night
+              <% } else { %>
+                Not Available
+              <% } %>
             </p>
           </div>
           <div class="view-btn">
             <hr>
-            <a href="/listings/<%=listing._id%>" class="btn btn-primary card-btn">View Property</a>
+            <a href="/listings/<%= listing._id %>" class="btn btn-primary card-btn">View Property</a>
           </div>
         </div>
       <% } %>
