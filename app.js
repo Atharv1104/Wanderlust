@@ -46,7 +46,7 @@ async function main(){
 const store=MongoStore.create({
     mongoUrl:dbUrl,
     crypto:{
-        secret:"mysupersecretestring"
+        secret:process.env.SECRET,
     },
     touchAfter:24*60*60   
 });
@@ -56,7 +56,7 @@ store.on("error",()=>{
 });
 const sessionOptions={
     store,
-    secret: "mysupersecretestring", 
+    secret: process.env.SECRET, 
     resave:false, 
     saveUninitialized:true,
     cookie:{
