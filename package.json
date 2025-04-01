@@ -10,6 +10,7 @@
   "author": "Atharv pore",
   "license": "ISC",
   "dependencies": {
+    "@mapbox/mapbox-sdk": "^0.16.1",
     "cloudinary": "^1.21.0",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^5.1.0",

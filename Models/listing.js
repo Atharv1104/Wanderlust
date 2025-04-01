@@ -11,7 +11,7 @@ const listingSchema = new Schema({
     },
     image: {
         url:String,
-        filenmame: String,
+        filename: String,
     },
     price: {
         type: Number,
@@ -32,6 +32,11 @@ const listingSchema = new Schema({
         type:Schema.Types.ObjectId,
         ref:"User",
     },
+    
+    category:{
+        type:String,
+        enum:["Mountains","Castles","Pools","Beach","Iconic cities","Rooms","Arctic","Farm","Camping"],
+    }
 });
 
 listingSchema.post("findOneAndDelete", async (listing)=>{

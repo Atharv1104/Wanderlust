@@ -96,7 +96,7 @@ body {
 .card-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    column-gap: 1rem;
 }
 
 .cardInfo {
@@ -302,3 +302,61 @@ body {
         height: 300px;
     }
 }
+
+/* Map */
+#map { 
+  height: 400px;
+  width:80vh;
+ }
+
+ /* Filters */
+
+ #filters{
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+    
+  }
+  .filter{
+    text-align: center;
+    margin-right: 3rem;
+    margin-top: 1rem;
+    opacity: 0.7;
+   
+    
+  }
+  .filter:hover{
+    opacity:1;
+    cursor: pointer;
+  }
+  .tax-info{
+    display:none;
+  }
+  .tax-toogle{
+    border:1px solid black;
+    border-radius: 2rem;
+    height: 3.5rem;
+    padding: 1rem;
+    text-align: center;
+  }
+  /* search bar */
+  .btn-search{
+    background-color:#fe424d;
+    border-radius: 25px;
+    padding:0 1rem 0 1rem;
+  }
+  .btn-search:hover{
+    background-color:#fe424d;
+  }
+  .search-ip{
+    border-radius: 25px;
+    padding:0.5rem 2rem 0.5rem 2rem;
+  }
+  #filters button{
+    border: none;
+    
+  }
+  .filter p{
+    font-size: small;
+    
+  }

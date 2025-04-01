@@ -1,4 +1,8 @@
 <% layout('/layouts/boilerplate.ejs')-%>
+<script>
+    const mapToken= "<%=process.env.MAP_TOKEN%>";
+    const listing= "<%-JSON.stringify(listing)%>";
+</script>
 
 <div class="container listing-container">
     <h2 class="head text-center"><%= listing.title %></h2>
@@ -42,9 +46,20 @@
     </div>
 
     <hr>
+    <br>
+    <!-- <h3>Where you'll be</h3>
+    <br>
+    <div class="col-md-8 " id="map">
+       <script src="/JS/map.js"></script>
+       
+        
 
+    </div> -->
+    <br>
+   
     <!-- Review Form Section -->
     <% if (currUser) { %>
+    <hr>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h4 class="text-center">Leave a Review</h4>
@@ -81,7 +96,7 @@
     </div>
     <% } %>
 
-    <hr>
+    
 
     <!-- All Reviews Section -->
     <div class="row justify-content-center">

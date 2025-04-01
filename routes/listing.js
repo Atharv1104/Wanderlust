@@ -5,7 +5,7 @@ const {isLoggedIn, isOwner,validateListing}=require("../middleware.js")
 const listingController=require("../Controllers/listings.js")
 const multer  = require('multer')
 const{storage}=require("../cloudConfig.js")
-const upload = multer({ storage })
+const upload = multer({ storage });
 
 
 router.route("/")
@@ -19,6 +19,9 @@ router.route("/")
     wrapAsync(listingController.createListing));
 
 //New Route
+router.get("/search",wrapAsync(listingController.searchListing))
+router.get("/category",wrapAsync(listingController.categoriesListing))
+
 router.get("/new",
     isLoggedIn,
     listingController.newForm);
@@ -58,5 +61,6 @@ router.delete("/:id/delete",
     isOwner,
     wrapAsync(listingController.deleteListing)
 );
+
 
 module.exports=router;

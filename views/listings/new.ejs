@@ -21,12 +21,29 @@
                     <textarea cols="50" rows="5" class="form-control" name="listing[description]" required></textarea>
     
                     </div>
+                    
                     <div class="mb-3">
                         <label for="image" class="form-label"> Upload image</label>
-                        <input type="file"  class="form-control" name="listing[image]">
+                        <input type="file"  class="form-control" name="listing[image]" >
                         
                     </div>
-                
+                    
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category:</label>
+                        <select class="form-control" name="listing[category]">
+                            <option>Rooms</option>
+                            <option>Iconic cities</option>
+                            <option>Mountain</option>
+                            <option>Castle</option>
+                            <option>Pools</option>
+                            <option>Beach</option>
+                            <option>Farm</option>
+                            <option>Arctic</option>
+                            <option>Camping</option>
+                            
+                        </select>
+        
+                    </div>
                     <div class="row">
                         <div class="mb-3 col-md-4">
                          <label for="price" class="form-label">Price</label>

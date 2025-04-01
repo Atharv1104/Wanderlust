@@ -4,11 +4,15 @@ module.exports.listingSchema = joi.object({
     listing: joi.object({
         title: joi.string().required(),
         description: joi.string().required(),
+        image: joi.object({
+            url: joi.string(),
+            filename: joi.string(),
+        }).allow(null),
         location: joi.string().required(),
         country: joi.string().required(),
         price: joi.number().required().min(0),
-        image: joi.string().allow("", null)
-    }).required()
+        category: joi.string().valid("Mountain", "Castles", "Pools", "Beach", "Iconic cities", "Rooms", "Arctic", "Farm", "Camping").required(),
+    }).required(),
 });
 
 module.exports.reviewSchema = joi.object({

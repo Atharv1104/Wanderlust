@@ -1,11 +1,82 @@
 <% layout('/layouts/boilerplate.ejs')-%>
 
+<div class="container">
+  <form action="/listings/category" method="GET">
+  <div id="filters" >
+    <button type="submit" name="filter" value="Trending">
+      <div class="filter ">
+      <div><i class="fa-solid fa-fire"></i></div>
+      <P>Trending</P>
+    </div>
+    </button >
+    <button type="submit" name="filter" value="Rooms">
+      <div class="filter" >
+      <div><i class="fa-solid fa-bed"></i></div>
+      <P>Rooms</P>
+    </div>
+    </button>
+    <button type="submit" name="filter" value="Iconic">
+      <div class="filter">
+      <div><i class="fa-solid fa-city"></i></div>
+      <P>Iconic cities</P>
+    </div>
+    </button>
+    <button type="submit" name="filter" value="Mountains">
+      <div class="filter">
+      <div><i class="fa-solid fa-mountain-sun"></i></div>
+      <P>Mountains</P>
+    </div>
+    </button>
+    <button type="submit" name="filter" value="Castles">
+      <div class="filter">
+      <div><i class="fa-solid fa-chess-rook"></i></div>
+      <P>Castles</P>
+    </div>
+    </button>
+    <button type="submit" name="filter" value="Pools">
+      <div class="filter">
+      <div><i class="fa-solid fa-person-swimming"></i></div>
+      <P>Pools</P>
+    </div>
+    </button>
+    <button type="submit" name="filter" value="Beach">
+      <div class="filter">
+      <div><i class="fa-solid fa-umbrella-beach"></i></div>
+      <P>Beach</P>
+    </div>
+    </button>
+    <button type="submit" name="filter" value="Farm">
+      <div class="filter">
+      <div><i class="fa-solid fa-cow"></i></div>
+      <P>Farm</P>
+    </div>
+    </button>
+    <button type="submit" name="filter" value="Arctic">
+      <div class="filter">
+      <div><i class="fa-solid fa-snowflake"></i></div>
+      <P>Arctic</P>
+    </div>
+    </button>
+    <button type="submit" name="filter" value="">
+      <div class="filter">
+      <div><i class="fa-solid fa-campground"></i></div>
+      <P>Camping</P>
+    </div>
+    </button>
+    
+  </form>
 
-<body>
-  <div class="container">
-    <h2 class="head">All Listings</h2>
+    <div class="tax-toogle ">
+      <div class="form-check-reverse form-switch   ">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Total before Taxes</label>
+      </div>
+    </div>
+  </div>
+    <!-- <h2 class="head">All Listings</h2> --> 
+    
     <br>
-    <br>
+  
     <div class="card-container">
       <% for(let listing of allListings) { %>
         <div class="card">
@@ -16,12 +87,8 @@
             <p class="card-text">
               Location: <%= listing.location %><br>
               Country: <%= listing.country %><br>
-              Price: 
-              <% if (listing.price) { %>
-                &#8377;<%= listing.price.toLocaleString("en-IN") %>/Night
-              <% } else { %>
-                Not Available
-              <% } %>
+              Price:&#8377;<%= listing.price.toLocaleString("en-IN") %>/Night <i class="tax-info"> +18% GST</i>
+             
             </p>
           </div>
           <div class="view-btn">
@@ -32,6 +99,18 @@
       <% } %>
     </div>
   </div>
-</body>
 
 
+<script>
+  let taxSwitch=document.getElementById("flexSwitchCheckDefault");
+  taxSwitch.addEventListener("click",()=>{
+   let taxInfo=document.getElementsByClassName("tax-info");
+   for(info of taxInfo){
+    if(info.style.display!="inline"){
+      info.style.display="inline"; 
+    }else{
+      info.style.display="none";
+    }
+   }
+  })
+</script>

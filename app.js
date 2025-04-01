@@ -20,6 +20,7 @@ const User=require("./Models/user.js")
 
 const app = express();
 const MONGO_URL="mongodb://127.0.0.1:27017/wanderlust";
+// const dbUrl=process.env.ATLASDB_URL;
 
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
@@ -37,6 +38,7 @@ main()
     console.log(err);
 })
 async function main(){
+    // await mongoose.connect(dbUrl);
     await mongoose.connect(MONGO_URL);
 }
 
@@ -74,9 +76,7 @@ app.use("/listings",listingsRouter);
 app.use("/listings/:id/reviews",reviewsRouter);
 app.use("/",userRouter);
 
-app.get("/",(req,res)=>{
-    res.send("Hi i am root");
-});
+
 // app.get("/demouser", async (req,res)=>{
 //     let fakeUser=new User({
 //         email:"student@gmail.com",
