@@ -18,11 +18,12 @@ module.exports.signup=async(req,res,next)=>{
          });
     }catch(er){
         req.flash("error",er.message)
-        res.redirect("/signup")
+        res.redirect("/signup",)
     }
 };
 module.exports.renderLogin=(req,res)=>{
-    res.render("users/login.ejs");
+    
+    res.render("users/login.ejs",);
 };
 module.exports.login=(req,res)=>{
     req.flash("success","welcome back to wanderlust!");
