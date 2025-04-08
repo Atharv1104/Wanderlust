@@ -108,7 +108,7 @@ app.all("*", (req,res)=>{
 
 app.use((err,req,res,next)=>{
     let {status=500 ,message="Some error occured"}= err;
-    res.render("./error.ejs",{message});   
+    res.render("error.ejs",{message});   
 });
 app.listen(8080,()=>{
     console.log("App is listening at port 8080");

@@ -1,8 +1,15 @@
 
 
-<nav class="navbar navbar-expand-md bg-body-tertiary border-bottom sticky-top">
+<nav class="navbar navbar-expand-sm bg-body-tertiary border-bottom sticky-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="#" ><i class="fa-regular fa-compass"></i></a>
+      <div class="navbar-nav  sm-search">
+        
+        <form class="d-flex " role="search" action="/listings/search">
+          <input class="form-control me-2 search-ip" type="search" placeholder="Search destination " aria-label="Search" name="search">
+          <button class="btn btn-search" type="submit">Search </button>
+        </form>
+      </div>
       
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
@@ -20,7 +27,7 @@
             </div>
           </nav>
         </div>  
-        <div class="navbar-nav ms-auto">
+        <div class="navbar-nav ms-auto hidden">
           <a class="nav-link" href="/listings/new">Add property</a>
           <% if(!currUser){ %>
             <a class="nav-link "  href="/signup"><b>Sign up</b></a>
@@ -31,7 +38,25 @@
           <% } %>
 
         </div>  
+         
+        
+
+
       </div>
+      <div class="ms-auto signup-btn">
+        <!-- Sign Up Button -->
+        <button type="button" class="btn btn-success ">
+          <% if(!currUser){ %>
+            <a class="nav-link-btn"  href="/signup"><b>Sign up</b></a>
+        
+          <%}%>
+          <% if(currUser){ %>
+              <a class="nav-link-btn" href="/logout"><b>Log Out</b></a>
+          <% } %>
+          
+        </button>
+
+      </div> 
     </div>
 
   </nav>  

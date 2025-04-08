@@ -7,6 +7,7 @@ body {
 
 .d-flex {
     display: flex;
+
 }
 
 .flex-column {
@@ -51,9 +52,20 @@ body {
 .nav-link {
     color: #222222 !important;
 }
-
-
-
+.nav-link-btn {
+    color: white !important;
+}
+.signup-btn,
+.signup-btn a
+{
+    text-decoration: none;
+    padding: 0.2rem  !important;
+    font-size: 0.7rem;
+    
+}
+.container-fluid{
+    flex-wrap:nowrap !important ;
+}
 /*  */
 
 
@@ -61,7 +73,7 @@ body {
 .footer {
     background-color: #ebebeb;
     text-align: center;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
     width: 100%;
     box-sizing: border-box;
 }
@@ -101,7 +113,7 @@ body {
 .scrollable-menu {
     max-height: 200px;
     overflow-y: auto;
-  }
+}
 
 /* Card Container */
 .card-container {
@@ -214,7 +226,7 @@ body {
 
 /*Header new-listing*/
 .head {
-    align-self: center;
+    justify-content: center;
 }
 /* Review Card Styling */
 .cardInfo{
@@ -316,7 +328,7 @@ body {
     display:flex;
     flex-wrap: wrap;
     align-items: center;
-    width: 60%;
+    
   }
   .filter{
     text-align: center;
@@ -339,8 +351,12 @@ body {
     height: 3.5rem;
     padding: 1rem;
     text-align: center;
-    width: 15rem;
-    margin-left:3rem;
+    width: 20rem;
+    margin-left:1rem;
+  }
+  .filter-btn{
+    
+   align-items: center;
   }
   /* search bar */
   .btn-search{
@@ -355,6 +371,13 @@ body {
     border-radius: 25px;
     padding:0.5rem 2rem 0.5rem 2rem;
   }
+  .sm-search{
+    
+    display: inline;
+    align-items: center;
+    
+    
+  }
   #filters button{
     border: none;
     box-shadow: 0px 0px 15px 5px white;
@@ -368,10 +391,9 @@ body {
   .options{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-
+    margin: 0rem 2rem;
   }
   /* filters 1*/
 
@@ -429,10 +451,33 @@ body {
 }
 .container, .container-lg, .container-md, .container-sm, .container-xl {
     max-width: 100% !important;
-  }
+}
   
-  @media screen and (max-width: 950px) {
+.login-form{
+    margin-bottom: 4rem;
+}
+.signup-form{
+    margin-bottom: 4rem;
+}
+@media screen and (max-width: 950px) {
     .tax-toogle {
-      display: none;
+        display: none;
+        }
+    
+    .hidden {
+        display: none;
     }
-  }
+    
+}
+@media screen and (min-width: 575px) {
+   
+    .sm-search{
+
+        display:none !important;
+    }
+}
+@media screen and (min-width: 950px) {
+    .signup-btn{
+        display: none;
+    }
+}
