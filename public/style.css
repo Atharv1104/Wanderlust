@@ -141,7 +141,7 @@ body {
     
     margin-bottom: 2rem;
     width:20rem;
-    height: 35rem;
+    height: fit-content;
     box-sizing: border-box;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -307,7 +307,7 @@ body {
     width:600px;
 }
 .img-container{
-    width:100%;
+    width:90%;
 }
 
 /* Responsive Behavior */
