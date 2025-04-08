@@ -283,7 +283,7 @@ body {
 
 /* Image Container - Wider Layout */
 .img-container {
-    height: 50%; /* Slightly taller */
+    /* height: 50%; Slightly taller */
     width: 100%;
     max-width: 900px; /* Constrain maximum width */
     margin: 0 auto; /* Center horizontally */

@@ -54,6 +54,7 @@ const store=MongoStore.create({
 store.on("error",()=>{
     console.log("Error on mongo session store",err);
 });
+
 const sessionOptions={
     store,
     secret: process.env.SECRET, 
